@@ -1,0 +1,35 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CA DMV License Plate Quiz</title>
+    <script type='module' src="game.js"></script>
+    <style>
+    body {
+        background-color: #f4f4f4;
+    }
+    @font-face {
+    font-family: licenseplate;
+    src: url(resources/fonts/licenseplate.ttf);
+    }
+
+    #canvas {
+        max-width: 550;
+        width: 100%;
+        height: auto;
+    }
+    </style>
+</head>
+<body>
+    <div id="play_area">
+        <div id="plate">
+            <canvas id="canvas" width=550 height=309></canvas>
+        </div>
+        <div id="license"></div>
+        <div id="customer"></div>
+        <button id="yes">ACCEPTED</button>
+        <button id="no">REJECTED</button>
+        <div id="response"></div>
+        <p><div id="dmv"></div></p>
+        <div id="verdict"></div>
+        <div id="current_score"></div>
+    </div>
+</body>
