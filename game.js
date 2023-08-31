@@ -8,6 +8,11 @@ export let currentRow = [];
 
 export let wins = 0;
 
+export let true_positives = 0;
+export let true_negatives = 0;
+export let false_positives = 0;
+export let false_negatives = 0;
+
 export let losses = 0;
 
 export async function getData() {
@@ -25,9 +30,19 @@ function onAnswer(answer) {
     if (currentRow[4] == answer) {
         wins += 1;
         document.getElementById('response').textContent = 'CORRECT ✅';
+        if (answer == 'Y') {
+            true_positives += 1;
+        } else {
+            true_negatives += 1;
+        }
     } else {
         losses += 1;
         document.getElementById('response').textContent = 'INCORRECT ❌';
+        if (answer == 'Y') {
+            false_positives += 1;
+        } else {
+            false_negatives += 1;
+        }
     }
     let verdict = '';
     if (currentRow[4] == 'Y') {
@@ -40,6 +55,12 @@ function onAnswer(answer) {
     document.getElementById('dmv').textContent = 'DMV: ' + currentRow[3];
     document.getElementById('verdict').textContent = verdict;
     document.getElementById('current_score').textContent = 'Wins: ' + wins + '; Losses: ' + losses;
+    if ((true_positives > 0 || false_negatives > 0) && (true_negatives > 0 || false_positives > 0)) {
+        let rejected_accuracy = true_negatives/(true_negatives + false_positives);
+        let accepted_accuracy = true_positives/(true_positives + false_negatives);
+        document.getElementById('current_score').textContent += '; Accepted accuracy: ' + accepted_accuracy.toFixed(2) + '; Rejected accuracy: ' + rejected_accuracy.toFixed(2);
+
+    }
     // omg set timeout based on length of the dmv text?
     let timeout = 3000;
     if (currentRow[3].length > 40) {
